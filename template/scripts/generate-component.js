@@ -48,13 +48,26 @@ async function writeFiles(componentName) {
   });
 
   await writeFile(
+    `${componentDir}/${componentName}/${componentName}.scss`,
+    ``
+  ).catch(error => {
+    if (error) {
+      console.error('Could not write .scss file: ' + error.message);
+      throw error;
+    }
+  });
+
+  await writeFile(
     `${componentDir}/${componentName}/${componentName}.js`,
-    `export default class ${componentName} extends Component {
+    `import './${componentName}.scss'
+
+export default class ${componentName} extends Component {
   async start() {}
 }`
   ).catch(error => {
     if (error) {
-      return console.error('Could not write .js file: ' + error.message);
+      console.error('Could not write .js file: ' + error.message);
+      throw error;
     }
   });
 }
