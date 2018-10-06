@@ -59,7 +59,7 @@ async function writeFiles(componentName) {
 
   await writeFile(
     `${componentDir}/${componentName}/${componentName}.js`,
-    `import './${componentName}.scss'
+    `import './${componentName}.scss';
 
 export default class ${componentName} extends Component {
   async start() {}
